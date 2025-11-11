@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student Outcome</title>
+
+    <!-- daisy UI-->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- htmx -->
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.7/dist/htmx.min.js"
+        integrity="sha384-ZBXiYtYQ6hJ2Y0ZNoYuI+Nq5MqWBr+chMrS/RkXpNzQCApHEhOt2aY8EJgqwHLkJ"
+        crossorigin="anonymous"></script>
+
+    <!-- Day js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1>Student Outcome</h1>
+        </header>
+        <br>
+        <section class="main-section">
+            <div class="chat-box" id="chat">
+                <div class="chat chat-start" style="padding-right:50%;">
+                    <div class="chat-image avatar">
+                        <div class="w-10 rounded-full">
+                            <img alt="Tailwind CSS chat bubble component" src="{% static 'images/robot.webp' %}" />
+                        </div>
+                    </div>
+                    <div class="chat-header">
+                        AI
+                    </div>
+                    <div class="chat-bubble" style="text-align: justify;">Hello, How can i Help You?</div>
+                    <div class="chat-footer opacity-50">
+                        <button onclick="speak(this)" class="sound">
+                            <img width="15" height="15" src="{% static 'images/icons8-speaker-20.png' %}" alt="speaker"
+                                class="speaker-img" data-mute="{% static 'images/icons8-mute-20.png' %}"
+                                data-speaker="{% static 'images/icons8-speaker-20.png' %}" />
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <hr>
+        <section class="inputs-section">
+            <form hx-post="{% url 'search' %}" hx-target="#chat" hx-swap="beforeend" class="text-based"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <div class="outer-card">
+                        <textarea name="query" id="promt" placeholder="Enter promt"></textarea>
+                    </div>
+                </div>
+                <input type="submit" hidden id="submit">
+            </form>
+        </section>
+
+        <hr>
+
+        <footer>Thanks for visiting us 😊</footer>
+
+
+    </main>
+
+
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <script src="{% static 'js/base.js' %}"></script>
+</body>
+
+</html>
